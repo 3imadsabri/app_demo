@@ -2,8 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:marrakech_demo2/widget/button_widget.dart';
-import 'package:marrakech_demo2/widget/navigation_drawer_widget.dart';
+import 'package:marrakech_demo2/page/home.dart';
 
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -16,7 +15,7 @@ Future main() async {
 }
 
 class MyApp extends StatelessWidget {
-  static final String title = 'Navigation Drawer';
+  static final String title = 'Accueil';
 
   @override
   Widget build(BuildContext context) => MaterialApp(
@@ -24,35 +23,5 @@ class MyApp extends StatelessWidget {
         title: title,
         theme: ThemeData(primarySwatch: Colors.blue),
         home: MainPage(),
-      );
-}
-
-class MainPage extends StatefulWidget {
-  @override
-  _MainPageState createState() => _MainPageState();
-}
-
-class _MainPageState extends State<MainPage> {
-  @override
-  Widget build(BuildContext context) => Scaffold(
-        drawer: NavigationDrawerWidget(),
-        //endDrawer: NavigationDrawerWidget(),
-        appBar: AppBar(
-          title: Text(MyApp.title),
-        ),
-        body: Builder(
-          builder: (context) => Container(
-            alignment: Alignment.center,
-            padding: EdgeInsets.symmetric(horizontal: 32),
-            child: ButtonWidget(
-              icon: Icons.open_in_new,
-              text: 'Open Drawer',
-              onClicked: () {
-                Scaffold.of(context).openDrawer();
-                //Scaffold.of(context).openEndDrawer();
-              },
-            ),
-          ),
-        ),
       );
 }

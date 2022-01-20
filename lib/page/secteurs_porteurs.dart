@@ -1,21 +1,21 @@
-// ignore_for_file: use_key_in_widget_constructors, prefer_const_constructors
+// ignore_for_file: prefer_const_constructors, use_key_in_widget_constructors, camel_case_types
 
 import 'package:flutter/material.dart';
 import 'package:marrakech_demo2/custom/OptionButton.dart';
-import 'package:marrakech_demo2/page/shoppingDetail.dart';
+import 'package:marrakech_demo2/page/secteurs_porteursDetail.dart';
 import 'package:marrakech_demo2/sample_data.dart';
 import 'package:marrakech_demo2/utils/constants.dart';
 import 'package:marrakech_demo2/utils/widget_functions.dart';
 import 'package:marrakech_demo2/widget/navigation_drawer_widget.dart';
 
-class Shopping extends StatelessWidget {
+class Secteurs_porteurs extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Scaffold(
         drawer: NavigationDrawerWidget(),
         appBar: AppBar(
-          title: Text("Shopping"),
+          title: Text("Secteurs porteurs"),
           centerTitle: true,
-          backgroundColor: Colors.red,
+          backgroundColor: Colors.blueAccent,
         ),
         body: Container(
           child: LandingPage(),
@@ -46,10 +46,10 @@ class LandingPage extends StatelessWidget {
                     padding: sidePadding,
                     child: ListView.builder(
                         physics: BouncingScrollPhysics(),
-                        itemCount: SHOPPING_DATA.length,
+                        itemCount: SECTEUR_DATA.length,
                         itemBuilder: (context, index) {
                           return RealEstateItem(
-                            itemData: SHOPPING_DATA[index],
+                            itemData: SECTEUR_DATA[index],
                           );
                         }),
                   ),

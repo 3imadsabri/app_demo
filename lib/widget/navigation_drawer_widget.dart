@@ -1,12 +1,14 @@
 // ignore_for_file: prefer_const_declarations, prefer_const_constructors
 
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:marrakech_demo2/page/activities.dart';
 import 'package:marrakech_demo2/page/restaurant.dart';
 import 'package:marrakech_demo2/page/s_installer.dart';
 import 'package:marrakech_demo2/page/s_infomer.dart';
 import 'package:marrakech_demo2/page/home.dart';
-import 'package:marrakech_demo2/page/seacteurs_porteurs.dart';
+import 'package:marrakech_demo2/page/secteurs_porteurs.dart';
 import 'package:marrakech_demo2/page/shopping.dart';
 import 'package:marrakech_demo2/page/transport.dart';
 import 'package:marrakech_demo2/page/visiter.dart';
@@ -16,89 +18,96 @@ class NavigationDrawerWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final name = 'Marrakech City';
-    final urlImage =
-        'https://w0.peakpx.com/wallpaper/295/964/HD-wallpaper-morocco-marrakech-africa-city-mosque-red-city.jpg';
+    final image = 'assets/images/logo.png';
 
     return Drawer(
-      child: Material(
-        color: Color.fromRGBO(50, 75, 205, 1),
-        child: ListView(
-          children: <Widget>[
-            buildHeader(
-              urlImage: urlImage,
-              name: name,
-              onClicked: () => Navigator.of(context).push(MaterialPageRoute(
-                builder: (context) => HomePage(
-                  name: 'Marrakech City',
-                  urlImage: urlImage,
-                ),
-              )),
-            ),
-            Container(
-              padding: padding,
-              child: Column(
-                children: [
-                  const SizedBox(height: 0),
-                  Divider(color: Colors.white70),
-                  const SizedBox(height: 24),
-                  buildMenuItem(
-                    text: "S'informer",
-                    icon: Icons.contact_support,
-                    onClicked: () => selectedItem(context, 0),
-                  ),
-                  const SizedBox(height: 16),
-                  buildMenuItem(
-                    text: "S'installer",
-                    icon: Icons.maps_home_work_rounded,
-                    onClicked: () => selectedItem(context, 1),
-                  ),
-                  const SizedBox(height: 16),
-                  buildMenuItem(
-                    text: 'Restaurant',
-                    icon: Icons.restaurant_rounded,
-                    onClicked: () => selectedItem(context, 2),
-                  ),
-                  const SizedBox(height: 16),
-                  buildMenuItem(
-                    text: 'Visiter',
-                    icon: Icons.travel_explore_rounded,
-                    onClicked: () => selectedItem(context, 3),
-                  ),
-                  const SizedBox(height: 16),
-                  buildMenuItem(
-                    text: 'Shopping',
-                    icon: Icons.shopping_bag_rounded,
-                    onClicked: () => selectedItem(context, 4),
-                  ),
-                  const SizedBox(height: 16),
-                  buildMenuItem(
-                    text: 'Activites',
-                    icon: Icons.local_activity_rounded,
-                    onClicked: () => selectedItem(context, 5),
-                  ),
-                  const SizedBox(height: 16),
-                  buildMenuItem(
-                    text: 'Secteurs porteurs',
-                    icon: Icons.work_rounded,
-                    onClicked: () => selectedItem(context, 6),
-                  ),
-                  const SizedBox(height: 16),
-                  buildMenuItem(
-                    text: 'Transport',
-                    icon: Icons.emoji_transportation_rounded,
-                    onClicked: () => selectedItem(context, 7),
-                  ),
-                ],
+      child: Stack(children: <Widget>[
+        BackdropFilter(
+          filter: ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0),
+          child: Container(
+            decoration: BoxDecoration(
+              color: Colors.blue,
+              borderRadius: BorderRadius.only(
+                topRight: Radius.circular(40),
+                bottomRight: Radius.circular(40),
               ),
             ),
-          ],
+            child: ListView(
+              children: <Widget>[
+                buildHeader(
+                  image: image,
+                  name: name,
+                  onClicked: () => Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => MainPage(),
+                  )),
+                ),
+                Container(
+                  padding: padding,
+                  child: Column(
+                    children: [
+                      const SizedBox(height: 0),
+                      Divider(color: Colors.black),
+                      const SizedBox(height: 24),
+                      buildMenuItem(
+                        text: "S'informer",
+                        icon: Icons.contact_support,
+                        onClicked: () => selectedItem(context, 0),
+                      ),
+                      const SizedBox(height: 16),
+                      buildMenuItem(
+                        text: "S'installer",
+                        icon: Icons.maps_home_work_rounded,
+                        onClicked: () => selectedItem(context, 1),
+                      ),
+                      const SizedBox(height: 16),
+                      buildMenuItem(
+                        text: 'Restaurant',
+                        icon: Icons.restaurant_rounded,
+                        onClicked: () => selectedItem(context, 2),
+                      ),
+                      const SizedBox(height: 16),
+                      buildMenuItem(
+                        text: 'Visiter',
+                        icon: Icons.travel_explore_rounded,
+                        onClicked: () => selectedItem(context, 3),
+                      ),
+                      const SizedBox(height: 16),
+                      buildMenuItem(
+                        text: 'Shopping',
+                        icon: Icons.shopping_bag_rounded,
+                        onClicked: () => selectedItem(context, 4),
+                      ),
+                      const SizedBox(height: 16),
+                      buildMenuItem(
+                        text: 'Activites',
+                        icon: Icons.local_activity_rounded,
+                        onClicked: () => selectedItem(context, 5),
+                      ),
+                      const SizedBox(height: 16),
+                      buildMenuItem(
+                        text: 'Secteurs porteurs',
+                        icon: Icons.work_rounded,
+                        onClicked: () => selectedItem(context, 6),
+                      ),
+                      const SizedBox(height: 16),
+                      buildMenuItem(
+                        text: 'Transport',
+                        icon: Icons.emoji_transportation_rounded,
+                        onClicked: () => selectedItem(context, 7),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
         ),
-      ),
+      ]),
     );
   }
 
   Widget buildHeader({
-    required String urlImage,
+    required String image,
     required String name,
     required VoidCallback onClicked,
   }) =>
@@ -108,7 +117,7 @@ class NavigationDrawerWidget extends StatelessWidget {
           padding: padding.add(EdgeInsets.symmetric(vertical: 40)),
           child: Row(
             children: [
-              CircleAvatar(radius: 30, backgroundImage: NetworkImage(urlImage)),
+              CircleAvatar(radius: 30, backgroundImage: AssetImage(image)),
               SizedBox(width: 20),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -128,7 +137,7 @@ class NavigationDrawerWidget extends StatelessWidget {
   Widget buildMenuItem({
     required String text,
     required IconData icon,
-    VoidCallback? onClicked,
+    required VoidCallback onClicked,
   }) {
     final color = Colors.white;
     final hoverColor = Colors.white70;

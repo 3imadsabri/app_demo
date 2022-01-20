@@ -1,27 +1,48 @@
+// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
+
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
+import 'package:marrakech_demo2/custom/OptionButton.dart';
+import 'package:marrakech_demo2/main.dart';
+import 'package:marrakech_demo2/widget/button_widget.dart';
+import 'package:marrakech_demo2/widget/navigation_drawer_widget.dart';
 
-class HomePage extends StatelessWidget {
-  final String name;
-  final String urlImage;
+class MainPage extends StatefulWidget {
+  @override
+  _MainPageState createState() => _MainPageState();
+}
 
-  const HomePage({
-    Key? key,
-    required this.name,
-    required this.urlImage,
-  }) : super(key: key);
-
+class _MainPageState extends State<MainPage> {
   @override
   Widget build(BuildContext context) => Scaffold(
+        drawer: NavigationDrawerWidget(),
+        //endDrawer: NavigationDrawerWidget(),
         appBar: AppBar(
-          backgroundColor: Colors.pink,
-          title: Text(name),
-          centerTitle: true,
+          title: Text(MyApp.title),
         ),
-        body: Image.network(
-          urlImage,
-          width: double.infinity,
-          height: double.infinity,
-          fit: BoxFit.cover,
+        body: Builder(
+          builder: (context) => Container(
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage("assets/images/marrakech.jpg"),
+                fit: BoxFit.cover,
+              ),
+            ),
+            child: Stack(
+              children: [
+                Positioned(
+                  bottom: 20,
+                  child: Center(
+                    child: OptionButton(
+                      text: "Map View",
+                      icon: Icons.map_rounded,
+                      width: 400 * 0.35,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
         ),
       );
 }
