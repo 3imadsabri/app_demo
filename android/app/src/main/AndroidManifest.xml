@@ -2,7 +2,7 @@
     package="com.example.marrakech_demo2">
 <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
    <application
-        android:label="marrakech_demo2"
+        android:label="Marrakech City"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <meta-data
