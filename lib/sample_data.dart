@@ -129,3 +129,26 @@ const SHOPPING_DATA = [
         "Découvrez votre centre commercial à Marrakech Carré Eden Shopping Center. Fashion, bien être et restauration !"
   }
 ];
+const SINFORMER_DATA = [
+  {
+    "image": "assets/images/Information.jpg",
+    "amount": 1500,
+    "name": "Marrakech ",
+    "description":
+        "Marrakech est une ville située dans le centre du Maroc au pied des montagnes de l'Atlas. Marrakech est surnommée « la ville rouge » ou la « ville ocre » en référence à la couleur rouge d'une grande partie de ses immeubles et ses maisons. Marrakech abrite une vaste médina de 600 hectares, la plus peuplée d'Afrique du nord, et classée au patrimoine mondial de l'humanité. Grâce à la vitalité de sa médina, vieille de 900 ans, ses infrastructures hôtelières de classe mondiale et son climat ensoleillé, Marrakech s'est imposée comme la capitale incontestée du tourisme au Maroc. "
+  },
+  {
+    "image": "assets/images/Histoire.jpg",
+    "amount": 1500,
+    "name": "Histoire ",
+    "description":
+        " La ville été fondée en 1062 par Youssef Ibn Tachfine, premier roi de la dynastie des Almoravides.Plusieurs dynasties s'y sont ensuite succédées, chacune laissant à la postérité des monuments et des sites d’un patrimoine oral et matériel d’une grande valeur."
+  },
+  {
+    "image": "assets/images/Situation.png",
+    "amount": 1500,
+    "name": "Géographie ",
+    "description":
+        "Marrakech est situé dans le centre-sud du Maroc. Il est le chef-lieu de la plaine du Haouz, et de loin sa principale agglomération. La médina a été bâtie sur la rive gauche de l'oued Issil, à cinq kilomètres au sud de son point de confluence avec l'oued Tensift. Bâtie à une altitude moyenne de 450 mètres au-dessus du niveau de la mer, Marrakech est une ville au relief essentiellement plat. Seul le Jbel Gueliz,colline de grès d'une altitude de 55 mètres, et ses séquelles au nord (Koudiat El Abid), viennent rompre la monotonie de la plaine. "
+  },
+];

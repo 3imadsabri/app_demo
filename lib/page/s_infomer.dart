@@ -1,6 +1,11 @@
 // ignore_for_file: prefer_const_constructors, use_key_in_widget_constructors, prefer_const_literals_to_create_immutables
 
 import 'package:flutter/material.dart';
+import 'package:marrakech_demo2/custom/OptionButton.dart';
+import 'package:marrakech_demo2/page/s_infomerDetails.dart';
+import 'package:marrakech_demo2/sample_data.dart';
+import 'package:marrakech_demo2/utils/constants.dart';
+import 'package:marrakech_demo2/utils/widget_functions.dart';
 import 'package:marrakech_demo2/widget/navigation_drawer_widget.dart';
 
 class Sinfomer extends StatelessWidget {
@@ -19,104 +24,124 @@ class Sinfomer extends StatelessWidget {
               fit: BoxFit.cover,
             ),
           ),
-          child: ExamplesWidget(),
+          child: LandingPage(),
         ),
       );
 }
 
-class ExamplesWidget extends StatelessWidget {
+class LandingPage extends StatelessWidget {
   @override
-  Widget build(BuildContext context) => ListView(
-        padding: EdgeInsets.all(32),
-        children: [
-          buildDesc1(),
-          Center(child: buildSpace()),
-          Center(child: buildDesc2()),
-        ],
-      );
+  Widget build(BuildContext context) {
+    final Size size = MediaQuery.of(context).size;
+    final ThemeData themeData = Theme.of(context);
+    double padding = 4;
+    final sidePadding = EdgeInsets.symmetric(horizontal: padding);
+    return SafeArea(
+      child: Scaffold(
+          body: Container(
+        width: size.width,
+        height: size.height,
+        child: Stack(
+          children: [
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                addVerticalSpace(padding),
+                Expanded(
+                  child: Padding(
+                    padding: sidePadding,
+                    child: ListView.builder(
+                        physics: BouncingScrollPhysics(),
+                        itemCount: SINFORMER_DATA.length,
+                        itemBuilder: (context, index) {
+                          return RealEstateItem(
+                            itemData: SINFORMER_DATA[index],
+                          );
+                        }),
+                  ),
+                ),
+              ],
+            ),
+            Positioned(
+              bottom: 20,
+              width: size.width,
+              child: Center(
+                child: OptionButton(
+                  text: "Map View",
+                  icon: Icons.map_rounded,
+                  width: size.width * 0.35,
+                ),
+              ),
+            )
+          ],
+        ),
+      )),
+    );
+  }
+}
 
-  Widget buildDesc2() {
+class ChoiceOption extends StatelessWidget {
+  final String text;
+
+  const ChoiceOption({Key? key, required this.text}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final ThemeData themeData = Theme.of(context);
     return Container(
-      padding: EdgeInsets.all(34),
-      width: double.infinity,
-      height: 300,
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(20),
-        color: Colors.black.withOpacity(0.5),
-
-        /*image: DecorationImage(
-          image: NetworkImage(urlBackgroundImage),
-          fit: BoxFit.cover,
-          colorFilter: ColorFilter.mode(
-            Colors.black.withOpacity(0.25),
-            BlendMode.darken,
-          ),
-        ),*/
+        color: COLOR_GREY.withAlpha(25),
+        borderRadius: BorderRadius.circular(20.0),
       ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            'La ville rouge',
-            style: TextStyle(
-              fontSize: 24,
-              fontWeight: FontWeight.bold,
-              color: Colors.white,
-            ),
-          ),
-          const SizedBox(height: 8),
-          Text(
-            "Marrakech, ancienne cité impériale de l'ouest du Maroc, et un centre économique majeur abritant des mosquées, des palais et des jardins. ",
-            style: TextStyle(
-              fontSize: 24,
-              color: Colors.white,
-            ),
-            textAlign: TextAlign.center,
-          ),
-        ],
+      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 13),
+      margin: const EdgeInsets.only(left: 20),
+      child: Text(
+        text,
+        style: themeData.textTheme.headline5,
       ),
     );
   }
+}
 
-  Widget buildSpace() {
-    return Container(
-      height: 50,
-      decoration: BoxDecoration(
-        color: Colors.grey.withOpacity(0.0),
-      ),
-    );
-  }
+class RealEstateItem extends StatelessWidget {
+  final dynamic itemData;
 
-  Widget buildDesc1() {
-    return Container(
-      padding: EdgeInsets.all(34),
-      width: double.infinity,
-      height: 300,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(20),
-        color: Colors.black.withOpacity(0.5),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            'Fondation',
-            style: TextStyle(
-              fontSize: 24,
-              fontWeight: FontWeight.bold,
-              color: Colors.white,
+  const RealEstateItem({Key? key, this.itemData}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final ThemeData themeData = Theme.of(context);
+    return GestureDetector(
+      onTap: () {
+        Navigator.of(context).push(MaterialPageRoute(
+            builder: (context) => DetailPage(
+                  itemData: itemData,
+                )));
+      },
+      child: Container(
+        margin: const EdgeInsets.symmetric(vertical: 20),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Stack(
+              children: [
+                ClipRRect(
+                    borderRadius: BorderRadius.circular(35.0),
+                    child: Image.asset(itemData["image"])),
+              ],
             ),
-          ),
-          const SizedBox(height: 8),
-          Text(
-            "Marrakech, ancienne cité impériale de l'ouest du Maroc, et un centre économique majeur abritant des mosquées, des palais et des jardins.",
-            style: TextStyle(
-              fontSize: 24,
-              color: Colors.white,
+            addVerticalSpace(15),
+            Row(
+              children: [
+                Text(
+                  "${itemData["name"]}",
+                  style: themeData.textTheme.headline4,
+                )
+              ],
             ),
-            textAlign: TextAlign.center,
-          ),
-        ],
+            addVerticalSpace(10),
+          ],
+        ),
       ),
     );
   }
